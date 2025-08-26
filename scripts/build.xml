@@ -1,0 +1,27 @@
+<project name="api-connect-deployment" default="deploy-to-dev">
+
+  <property name="apic.server" value="your-apic-server.com" />
+  <property name="apic.org" value="your-org" />
+  <property name="apic.catalog" value="Sandbox" />
+
+  <target name="deploy-to-dev" description="Deploys products to the development catalog">
+    <exec executable="apic" failonerror="true">
+      <arg value="login"/>
+      <arg value="-s"/>
+      <arg value="${apic.server}"/>
+      <arg value="-u"/>
+      <arg value="your-username"/>
+      <arg value="-p"/>
+      <arg value="your-password"/>
+      </exec>
+
+    <exec executable="apic" failonerror="true">
+      <arg value="products:publish"/>
+      <arg value="products/my-product-1.0.0.yaml"/>
+      <arg value="-o"/>
+      <arg value="${apic.org}"/>
+      <arg value="-c"/>
+      <arg value="${apic.catalog}"/>
+    </exec>
+  </target>
+</project>
